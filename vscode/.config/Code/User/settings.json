@@ -1,0 +1,156 @@
+// Inserire le impostazioni in questo file per sovrascrivere quelle predefinite
+{
+    "editor.fontFamily": "'FiraCode Nerd Font Mono','Fira Code'",
+    "editor.fontSize": 12,
+    "editor.fontLigatures": true,
+    "git.confirmSync": false,
+    "sync.gist": "2816d3fc9edc6940bd4f21e633d6c393",
+    "sync.lastUpload": "",
+    "sync.autoDownload": false,
+    "sync.autoUpload": true,
+    "sync.lastDownload": "",
+    "sync.version": 262,
+    "sync.showSummary": true,
+    "sync.forceDownload": false,
+    "sync.anonymousGist": false,
+    "sync.host": "",
+    "sync.pathPrefix": "",
+    // Consente di configurare i criteri GLOB per escludere file e cartelle nelle ricerche. Eredita tutti i criteri GLOB dall'impostazione files.exclude.
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/dist": true,
+        "**/bower_components": true
+    },
+    "sync.quietSync": false,
+    "sync.askGistName": false,
+    "sync.removeExtensions": true,
+    "sync.syncExtensions": true,
+    "gitlens.advanced.messages": {},
+    "git.autofetch": true,
+    "explorer.confirmDelete": false,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "files.autoSave": "onFocusChange",
+    "workbench.iconTheme": "Monokai Pro (Filter Machine) Icons",
+    "eslint.format.enable": true,
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "eslint.lintTask.enable": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.indentSize": "tabSize",
+    "editor.detectIndentation": false,
+    "workbench.tree.indent": 15,
+    "eslint.validate": [
+        "json",
+        "javascript",
+        "typescriptreact"
+    ],
+    "git.openRepositoryInParentFolders": "never",
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[scss]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    },
+    "markdown.extension.list.indentationSize": "inherit",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "markdown-pdf.outputDirectoryRelativePathFile": true,
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "files.exclude": {
+        "**/.trunk/*actions/": true,
+        "**/.trunk/*logs/": true,
+        "**/.trunk/*notifications/": true,
+        "**/.trunk/*out/": true,
+        "**/.trunk/*plugins/": true
+    },
+    "files.watcherExclude": {
+        "**/.trunk/*actions/": true,
+        "**/.trunk/*logs/": true,
+        "**/.trunk/*notifications/": true,
+        "**/.trunk/*out/": true,
+        "**/.trunk/*plugins/": true
+    },
+    "editor.stickyScroll.enabled": true,
+    "sonarlint.rules": {
+        "typescript:S6853": {
+            "level": "off"
+        },
+        "typescript:S3358": {
+            "level": "off"
+        },
+        "typescript:S4782": {
+            "level": "off"
+        },
+        "typescript:S6759": {
+            "level": "off"
+        },
+        "typescript:S4323": {
+            "level": "off"
+        },
+        "Web:S6851": {
+            "level": "off"
+        }
+    },
+    "workbench.colorTheme": "Monokai Pro (Filter Machine)",
+    "git.suggestSmartCommit": false,
+    "[vue]": {
+        "editor.defaultFormatter": "Vue.volar"
+    },
+    "explorer.confirmDragAndDrop": false,
+    "security.workspace.trust.untrustedFiles": "open",
+    "[svg]": {
+        "editor.defaultFormatter": "jock.svg"
+    },
+    "[astro]": {
+        "editor.defaultFormatter": "astro-build.astro-vscode"
+    },
+    "[mdx]": {
+        "editor.defaultFormatter": "unifiedjs.vscode-mdx"
+    },
+    "cloudcode.duetAI.project": "gen-lang-client-0901735103",
+    "diffEditor.codeLens": true,
+    "cloudcode.project": "gen-lang-client-0901735103",
+    "chat.editing.alwaysSaveWithGeneratedChanges": true,
+    "workbench.activityBar.location": "top",
+    "window.customTitleBarVisibility": "auto",
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "chat.tools.terminal.autoApprove": {
+        "docker compose": true,
+        "curl -s http://localhost/api/v1/acquisition/websdrs-all | head -50": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "npm run build": true,
+        "docker exec": true,
+        "\"": true,
+        "jq": true
+    },
+    "python.analysis.typeCheckingMode": "basic",
+    "chat.agent.maxRequests": 250,
+    "git.replaceTagsWhenPull": true,
+    "atlascode.rovodev.showEntitlementNotifications": false,
+    "zig.zls.enabled": "on",
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "markdown": true,
+        "scminput": false
+    },
+    "terminal.integrated.fontFamily": "'FiraCode Nerd Font Mono','Fira Code'",
+    "terminal.integrated.fontLigatures.enabled": true
+}
