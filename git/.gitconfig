@@ -1,0 +1,7 @@
+[user]
+	email = alessio.corsi@gmail.com
+	name = Alessio Corsi
+[init]
+	defaultBranch = main
+[pull]
+	rebase = false
