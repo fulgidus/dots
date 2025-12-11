@@ -9,10 +9,6 @@ test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
 ```bash
 test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 ```
-### Install Nerd Fonts
-```bash
-brew install font-hack-nerd-font
-```
 ### Install Zsh
 ```bash
 brew install zsh
