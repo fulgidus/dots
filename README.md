@@ -9,6 +9,10 @@ test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
 ```bash
 test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 ```
+### Install Git
+```bash
+brew install git
+```
 ### Install Zsh
 ```bash
 brew install zsh
