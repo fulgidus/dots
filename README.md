@@ -41,7 +41,7 @@ stow fonts
 ```
 ### Install Ghostty
 ```bash
-cd ~
+cd
 ```
 ```bash
 /bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
