@@ -1,0 +1,299 @@
+// Inserire le impostazioni in questo file per sovrascrivere quelle predefinite
+{
+    "editor.fontFamily": "Fira Code",
+    "editor.fontSize": 12,
+    "editor.fontLigatures": true,
+    "git.confirmSync": false,
+    "sync.gist": "2816d3fc9edc6940bd4f21e633d6c393",
+    "sync.lastUpload": "",
+    "sync.autoDownload": false,
+    "sync.autoUpload": true,
+    "sync.lastDownload": "",
+    "sync.version": 262,
+    "sync.showSummary": true,
+    "sync.forceDownload": false,
+    "sync.anonymousGist": false,
+    "sync.host": "",
+    "sync.pathPrefix": "",
+    // Consente di configurare i criteri GLOB per escludere file e cartelle nelle ricerche. Eredita tutti i criteri GLOB dall'impostazione files.exclude.
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/dist": true,
+        "**/bower_components": true
+    },
+    "sync.quietSync": false,
+    "sync.askGistName": false,
+    "sync.removeExtensions": true,
+    "sync.syncExtensions": true,
+    "gitlens.advanced.messages": {},
+    "git.autofetch": true,
+    "explorer.confirmDelete": false,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "files.autoSave": "onFocusChange",
+    "workbench.iconTheme": "Monokai Pro (Filter Machine) Icons",
+    "eslint.format.enable": true,
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "eslint.lintTask.enable": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.indentSize": "tabSize",
+    "editor.detectIndentation": false,
+    "workbench.tree.indent": 15,
+    "eslint.validate": [
+        "json",
+        "javascript",
+        "typescriptreact"
+    ],
+    "git.openRepositoryInParentFolders": "never",
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[scss]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    },
+    "markdown.extension.list.indentationSize": "inherit",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "markdown-pdf.outputDirectoryRelativePathFile": true,
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "files.exclude": {
+        "**/.trunk/*actions/": true,
+        "**/.trunk/*logs/": true,
+        "**/.trunk/*notifications/": true,
+        "**/.trunk/*out/": true,
+        "**/.trunk/*plugins/": true
+    },
+    "files.watcherExclude": {
+        "**/.trunk/*actions/": true,
+        "**/.trunk/*logs/": true,
+        "**/.trunk/*notifications/": true,
+        "**/.trunk/*out/": true,
+        "**/.trunk/*plugins/": true
+    },
+    "editor.stickyScroll.enabled": true,
+    "sonarlint.rules": {
+        "typescript:S6853": {
+            "level": "off"
+        },
+        "typescript:S3358": {
+            "level": "off"
+        },
+        "typescript:S4782": {
+            "level": "off"
+        },
+        "typescript:S6759": {
+            "level": "off"
+        },
+        "typescript:S4323": {
+            "level": "off"
+        },
+        "Web:S6851": {
+            "level": "off"
+        }
+    },
+    "workbench.colorTheme": "Monokai Pro (Filter Machine)",
+    "git.suggestSmartCommit": false,
+    "[vue]": {
+        "editor.defaultFormatter": "Vue.volar"
+    },
+    "explorer.confirmDragAndDrop": false,
+    "security.workspace.trust.untrustedFiles": "open",
+    "[svg]": {
+        "editor.defaultFormatter": "jock.svg"
+    },
+    "[astro]": {
+        "editor.defaultFormatter": "astro-build.astro-vscode"
+    },
+    "[mdx]": {
+        "editor.defaultFormatter": "unifiedjs.vscode-mdx"
+    },
+    "diffEditor.codeLens": true,
+    "cloudcode.project": "gen-lang-client-0901735103",
+    "chat.editing.alwaysSaveWithGeneratedChanges": true,
+    "ligoLanguageServer.ligoBinaryPath": "/home/fulgidus/Documents/Projects/verba-volant/src/ligo",
+    "dev.containers.executeInWSL": true,
+    "files.associations": {
+        "*.toml": "toml",
+        "*.rmd": "markdown",
+        "*.zig": "zig"
+    },
+    "[toml]": {
+        "editor.defaultFormatter": "tamasfe.even-better-toml"
+    },
+    "[rust]": {
+        "editor.defaultFormatter": "jinxdash.prettier-rust"
+    },
+    "[dart]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.rulers": [
+            80
+        ],
+        "editor.selectionHighlight": false,
+        "editor.tabCompletion": "onlySnippets",
+        "editor.wordBasedSuggestions": "off"
+    },
+    "notebook.lineNumbers": "on",
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "haskell.manageHLS": "GHCup",
+    "geminicodeassist.project": "gen-lang-client-0901735103",
+    "editor.accessibilitySupport": "off",
+    "workbench.editorAssociations": {
+        "*.copilotmd": "vscode.markdown.preview.editor",
+        "*.db": "default"
+    },
+    "gitlens.ai.model": "vscode",
+    "gitlens.ai.vscode.model": "copilot:gpt-3.5-turbo",
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "markdown": true,
+        "scminput": false
+    },
+    "geminicodeassist.inlineSuggestions.enableAuto": false,
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[plaintext]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[properties]": {
+        "editor.defaultFormatter": "trunk.io"
+    },
+    "[python]": {
+        "editor.defaultFormatter": "trunk.io"
+    },
+    "zig.zls.enabled": "on",
+    "chat.tools.autoApprove": true,
+    "workbench.activityBar.location": "top",
+    "terminal.integrated.fontFamily": "monospace",
+    "yaml.schemas": {
+        "file:///home/fulgidus/.vscode/extensions/continue.continue-1.2.10-linux-x64/config-yaml-schema.json": [
+            ".continue/**/*.yaml"
+        ],
+        "file:///home/fulgidus/.vscode/extensions/atlassian.atlascode-4.0.8/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    },
+    "vue.server.hybridMode": false,
+    "docker.extension.enableComposeLanguageServer": false,
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "github.copilot.chat.localeOverride": "it",
+    "github.copilot.chat.agent.thinkingTool": true,
+    "github.copilot.chat.commitMessageGeneration.instructions": [],
+    "python.analysis.typeCheckingMode": "standard",
+    "chat.tools.terminal.autoApprove": {
+        "npm run dev": true,
+        "curl": true,
+        "/dev/null": true,
+        "return\\": true,
+        "redeem\\": true,
+        "contracts\"": true,
+        "jq": true,
+        "url:": true,
+        ".request.urlPattern'": true,
+        "uniq": true,
+        "./node_modules/.bin/webpack": true,
+        "npx": true,
+        "node": true,
+        "docker compose": true,
+        "mvn clean": true,
+        "\"contractId\":": true,
+        "npm create": true,
+        "npm install": true,
+        "mkdir": true,
+        "services,types,components,pages}": true,
+        "cp": true,
+        "state=test": true,
+        "code=test\"": true,
+        "pkill": true,
+        "ForEach-Object": true,
+        ".venv\\Scripts\\Activate.ps1": true,
+        "pip": true,
+        "httpx": true,
+        "asyncio": true,
+        "pydantic": true,
+        "sqlalchemy\"": true,
+        "pytest": true,
+        "test\"": true,
+        "python -m pytest tests/e2e/ -v --tb=short": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "python -m pytest tests/e2e/ -v --tb=line": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "Building": true,
+        "Step": true,
+        "error": true,
+        "ERROR\"": true,
+        "docker system": true,
+        "Application": true,
+        "cd c:\\Users\\aless\\Documents\\Projects\\heimdall\\services\\rf-acquisition; python -m pytest tests/e2e/test_complete_workflow.py -v --tb=short 2>&1 | Select-Object -Last 100": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "Exception": true,
+        "Traceback\"": true,
+        "python -m pytest tests/e2e/test_complete_workflow.py::test_api_error_handling -v": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "python -m pytest tests/e2e/test_complete_workflow.py::test_acquisition_complete_workflow -v -s": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "Get-Item": true,
+        "Expression={[math]::Round($_.Length/1KB,": true,
+        "npm run build": true,
+        "docker exec": true,
+        "app": true,
+        "print(app.routes)\"": true,
+        "sys.path.insert(0,": true,
+        "from": true,
+        "print([str(r)": true,
+        "npm init": true,
+        "pnpm": true,
+        "rm": true,
+        "npm cache": true,
+        "true": true,
+        "kill": true,
+        "timeout": true,
+        "Tests": true,
+        "git add": true,
+        "git commit": true,
+        "git push": true,
+        "docker logs": true
+    },
+    "chat.agent.maxRequests": 250,
+    "sonarlint.automaticAnalysis": false,
+    "makefile.configureOnOpen": true,
+    "githubPullRequests.codingAgent.promptForConfirmation": false,
+    "chat.mcp.gallery.enabled": true,
+    "explorer.confirmPasteNative": false,
+    "terminal.integrated.defaultProfile.windows": "Ubuntu-24.04 (WSL)",
+    "security.allowedUNCHosts": [
+        "wsl.localhost"
+    ],
+    "remote.autoForwardPortsSource": "hybrid",
+    "markdown-pdf.executablePath": "/usr/bin/google-chrome",
+    "containers.containerClient": "com.microsoft.visualstudio.containers.docker",
+    "containers.orchestratorClient": "com.microsoft.visualstudio.orchestrators.dockercompose",
+    "python.terminal.useEnvFile": true
+}
