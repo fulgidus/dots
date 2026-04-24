@@ -3,19 +3,58 @@
 Configurazioni personali gestite con [chezmoi](https://chezmoi.io).  
 Funzionano su **Linux** (Linuxbrew) e **macOS** (Homebrew) senza modifiche.
 
+## Stack
+
+| Categoria | Tool |
+|---|---|
+| Shell | [Fish](https://fishshell.com/) 4+ |
+| Prompt | [Starship](https://starship.rs/) — tema Tokyo Night |
+| Terminale | [WezTerm](https://wezfurlong.org/wezterm/) |
+| Version manager | [mise](https://mise.jdx.dev/) |
+| History sync | [atuin](https://atuin.sh/) |
+| Git diff | [delta](https://dandavison.github.io/delta/) |
+| Git TUI | [lazygit](https://github.com/jesseduffield/lazygit) |
+
+### CLI moderni
+
+| Comando | Rimpiazza | Tool |
+|---|---|---|
+| `ls` / `ll` / `lt` | `ls` | [eza](https://eza.rocks/) |
+| `cat` | `cat` | [bat](https://github.com/sharkdp/bat) |
+| `z <path>` | `cd` | [zoxide](https://github.com/ajeetdsouza/zoxide) |
+| `rg` | `grep` | [ripgrep](https://github.com/BurntSushi/ripgrep) |
+| `fd` | `find` | [fd](https://github.com/sharkdp/fd) |
+| Ctrl+R / Ctrl+T | — | [fzf](https://github.com/junegunn/fzf) |
+
+---
+
 ## File tracciati
 
-| File sorgente | Destinazione | Contenuto |
-|---|---|---|
-| `dot_zshrc` | `~/.zshrc` | Shell principale (oh-my-zsh + p10k) |
-| `dot_zshenv` | `~/.zshenv` | Variabili d'ambiente pre-shell |
-| `dot_p10k.zsh` | `~/.p10k.zsh` | Configurazione prompt Powerlevel10k |
-| `dot_wezterm.lua` | `~/.wezterm.lua` | Configurazione terminale WezTerm |
-| `dot_gitconfig` | `~/.gitconfig` | Configurazione Git globale |
-| `dot_config/Code/User/settings.json` | `~/.config/Code/User/settings.json` | Settings VSCode |
+```
+~/.local/share/chezmoi/              ← source dir (questo repo)
+├── .chezmoi.toml.tmpl               ← dati machine-specific (nome, email)
+├── dot_gitconfig                    ← ~/.gitconfig  (con delta)
+├── dot_wezterm.lua                  ← ~/.wezterm.lua
+├── README.md
+└── dot_config/
+    ├── starship.toml                ← ~/.config/starship.toml
+    ├── fish/
+    │   ├── config.fish              ← ~/.config/fish/config.fish
+    │   └── conf.d/
+    │       ├── 00_paths.fish        ← PATH: bun, pnpm, opencode, zvm
+    │       ├── 01_env.fish          ← EDITOR, BAT_THEME, fzf backend
+    │       ├── 02_aliases.fish      ← ls/cat/lg/cz e altri alias
+    │       ├── 10_mise.fish         ← attiva mise (Node, Python, Go…)
+    │       ├── 11_zoxide.fish       ← attiva zoxide (`z`, `zi`)
+    │       ├── 12_fzf.fish          ← key bindings fzf (Ctrl+R, Ctrl+T, Alt+C)
+    │       ├── 13_atuin.fish        ← history sync cross-machine
+    │       ├── 14_viteplus.fish     ← Vite+ runtime
+    │       └── 99_starship.fish     ← init prompt (deve stare ultimo)
+    └── Code/User/
+        └── settings.json           ← ~/.config/Code/User/settings.json
+```
 
-> **Convenzione chezmoi:** i file nella source dir usano il prefisso `dot_` al posto del `.`
-> e `private_` per i file con permessi 600. Il suffisso `.tmpl` attiva il motore di template Go.
+> **Convenzione chezmoi:** `dot_` → `.`, `private_` → permessi 600, `.tmpl` → template Go.
 
 ---
 
@@ -33,24 +72,20 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 </details>
 
 <details>
-<summary>Zsh + oh-my-zsh + Powerlevel10k</summary>
+<summary>Fish come shell di default</summary>
 
 ```bash
-brew install zsh
-sudo sh -c 'echo "/home/linuxbrew/.linuxbrew/bin/zsh" >> /etc/shells'
-chsh -s $(which zsh)
+# Aggiungi fish a /etc/shells
+echo /home/linuxbrew/.linuxbrew/bin/fish | sudo tee -a /etc/shells
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-brew install powerlevel10k
+# Imposta come default
+chsh -s /home/linuxbrew/.linuxbrew/bin/fish
 ```
-</details>
 
-<details>
-<summary>WezTerm (Ubuntu/Debian)</summary>
-
+Su macOS con Homebrew:
 ```bash
-/bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
+echo /opt/homebrew/bin/fish | sudo tee -a /etc/shells
+chsh -s /opt/homebrew/bin/fish
 ```
 </details>
 
@@ -60,7 +95,35 @@ brew install powerlevel10k
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply git@github.com:fulgidus/dots.git
 ```
 
-Questo comando fa tutto in un colpo: installa chezmoi, clona il repo e copia i file nelle posizioni corrette.
+Clona il repo, genera il config da `.chezmoi.toml.tmpl` e copia tutti i file nelle posizioni corrette.
+
+### 3. Installa i tool via brew
+
+```bash
+brew install fish starship eza bat zoxide fzf ripgrep fd git-delta mise atuin lazygit gh
+```
+
+### 4. Configura atuin (history sync)
+
+```bash
+# Nuovo account
+atuin register -u <username> -e <email> -p <password>
+
+# Oppure login su account esistente
+atuin login -u <username> -p <password>
+
+atuin sync
+```
+
+### 5. Installa i runtime con mise
+
+```bash
+# Esempio: installa Node LTS e Python
+mise use --global node@lts python@latest
+
+# Verifica
+mise list
+```
 
 ---
 
@@ -68,40 +131,47 @@ Questo comando fa tutto in un colpo: installa chezmoi, clona il repo e copia i f
 
 ### Modificare un file
 
-Modifica direttamente il file nella sua posizione normale (es. `~/.zshrc`), poi sincronizza la modifica nella source dir:
+Modifica il file direttamente nella sua posizione (es. `~/.config/fish/conf.d/02_aliases.fish`), poi:
 
 ```bash
-chezmoi re-add ~/.zshrc
+chezmoi re-add ~/.config/fish/conf.d/02_aliases.fish
 ```
 
-### Vedere cosa è cambiato
+### Scorciatoie alias
 
 ```bash
-chezmoi diff          # diff tra source dir e filesystem
-chezmoi status        # lista file modificati (come git status)
+czd   # chezmoi diff   — vedi cosa è cambiato
+cza   # chezmoi apply  — applica le modifiche dal repo
+czcd  # chezmoi cd     — entra nella source dir
 ```
 
-### Applicare le modifiche dal repo (pull)
+### Vedere le differenze pendenti
 
 ```bash
-chezmoi update        # git pull + chezmoi apply in un comando
+chezmoi diff    # diff completo tra source dir e filesystem
+chezmoi status  # lista file modificati (stile git status)
 ```
 
-### Modificare direttamente nella source dir
+### Aggiornare dal repo (pull)
 
 ```bash
-chezmoi edit ~/.zshrc      # apre il file sorgente nell'editor
-chezmoi apply ~/.zshrc     # applica solo quel file
+chezmoi update  # git pull + chezmoi apply in un colpo
+```
+
+### Modificare nella source dir ed editare direttamente
+
+```bash
+chezmoi edit ~/.config/fish/conf.d/02_aliases.fish  # apre nell'editor
+chezmoi apply                                         # applica
 ```
 
 ### Commit e push
 
 ```bash
-chezmoi cd             # entra in ~/.local/share/chezmoi
+czcd  # entra in ~/.local/share/chezmoi
 git add -A
-git commit -m "feat: descrizione modifica"
+git commit -m "feat: descrizione"
 git push
-# oppure: exit per tornare alla dir precedente
 ```
 
 ---
@@ -109,8 +179,8 @@ git push
 ## Aggiungere nuovi file
 
 ```bash
-chezmoi add ~/.config/ghostty/config   # aggiunge il file alla source dir
-chezmoi cd
+chezmoi add ~/.config/ghostty/config
+czcd
 git add -A && git commit -m "feat: add ghostty config" && git push
 ```
 
@@ -118,25 +188,23 @@ git add -A && git commit -m "feat: add ghostty config" && git push
 
 ## Configurazioni machine-specific (template)
 
-Per valori diversi tra macchine (es. email lavoro vs personale, proxy aziendale, percorsi diversi),
-chezmoi supporta template Go.
+Per valori diversi tra macchine — proxy aziendale, email lavoro/personale, path diversi.
 
 ### 1. Converti un file in template
 
 ```bash
 chezmoi chattr +template ~/.gitconfig
-# il file diventa dot_gitconfig.tmpl nella source dir
+# diventa dot_gitconfig.tmpl nella source dir
 ```
 
-### 2. Definisci i dati locali
+### 2. Dati locali
 
-Chezmoi chiede i valori al primo `init`. Per aggiungerli/modificarli manualmente:
+Il file `.chezmoi.toml.tmpl` genera `~/.config/chezmoi/chezmoi.toml` al primo `init`.  
+Per editarlo su una macchina esistente:
 
 ```bash
 chezmoi edit-config
 ```
-
-Struttura del config (`~/.config/chezmoi/chezmoi.toml`):
 
 ```toml
 [data]
@@ -144,7 +212,7 @@ Struttura del config (`~/.config/chezmoi/chezmoi.toml`):
     email = "alessio.corsi@gmail.com"
 ```
 
-### 3. Usa i valori nel template
+### 3. Sintassi template
 
 ```
 # dot_gitconfig.tmpl
@@ -153,23 +221,21 @@ Struttura del config (`~/.config/chezmoi/chezmoi.toml`):
     email = {{ .email }}
 ```
 
-### Condizionali per OS o hostname
-
 ```
+# Condizionale OS
 {{- if eq .chezmoi.os "darwin" }}
-# Solo su macOS
 export BROWSER=Safari
 {{- else }}
-# Solo su Linux
 export BROWSER=google-chrome
 {{- end }}
 
+# Condizionale hostname
 {{- if eq .chezmoi.hostname "work-laptop" }}
-export HTTP_PROXY="http://proxy.azienda.it:8080"
+set -gx HTTP_PROXY "http://proxy.azienda.it:8080"
 {{- end }}
 ```
 
-Variabili chezmoi sempre disponibili nei template:
+### Variabili sempre disponibili
 
 | Variabile | Esempio |
 |---|---|
@@ -181,25 +247,10 @@ Variabili chezmoi sempre disponibili nei template:
 
 ---
 
-## Struttura del repository
-
-```
-~/.local/share/chezmoi/        ← source dir (questo repo)
-├── .chezmoi.toml.tmpl         ← template del config chezmoi
-├── dot_zshrc                  ← ~/.zshrc
-├── dot_zshenv                 ← ~/.zshenv
-├── dot_p10k.zsh               ← ~/.p10k.zsh
-├── dot_wezterm.lua            ← ~/.wezterm.lua
-├── dot_gitconfig              ← ~/.gitconfig
-└── dot_config/
-    └── Code/User/
-        └── settings.json     ← ~/.config/Code/User/settings.json
-```
-
----
-
 ## Riferimenti
 
-- [chezmoi.io — documentazione ufficiale](https://chezmoi.io)
-- [chezmoi quick start](https://chezmoi.io/quick-start/)
-- [template reference (Go text/template)](https://pkg.go.dev/text/template)
+- [chezmoi.io](https://chezmoi.io) — documentazione ufficiale
+- [fishshell.com](https://fishshell.com/docs/current/) — documentazione fish
+- [starship.rs](https://starship.rs/config/) — configurazione starship
+- [mise.jdx.dev](https://mise.jdx.dev/) — version manager
+- [atuin.sh](https://atuin.sh/docs/) — history sync
