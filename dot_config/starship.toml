@@ -121,14 +121,6 @@ format      = "[ $time]($style)"
 style       = "fg:#565f89"
 time_format = "%H:%M"
 
-# ── Transient prompt (come POWERLEVEL9K_TRANSIENT_PROMPT=always) ─────────────
-# Dopo aver eseguito un comando, i prompt precedenti collassano a semplice ❯
-# così lo scrollback non è pieno di intestazioni ╭─/╰─ ripetute
-
-[transient_prompt]
-disabled = false
-format   = "[❯](bold fg:#9ece6a) "
-
 # ── Prompt character ─────────────────────────────────────────────────────────
 
 [character]
