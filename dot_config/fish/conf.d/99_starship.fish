@@ -11,3 +11,12 @@ starship init fish | source
 #   • Enter vuoto
 #   • Ctrl+C
 enable_transience
+
+# Transient prompt: ❯ verde su successo, ❯ rosso su errore
+function starship_transient_prompt_func
+    if test $STARSHIP_CMD_STATUS -eq 0
+        printf "\e[1;32m❯\e[0m "   # verde
+    else
+        printf "\e[1;31m❯\e[0m "   # rosso
+    end
+end
