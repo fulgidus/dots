@@ -15,6 +15,7 @@ enable_transience
 # (niente ANSI, niente repaint — fish gestisce tutto internamente)
 function __transient_cancel
     commandline --replace ''
+    commandline -f repaint   # ridisegna la riga vuota (rimuove il testo parziale)
     commandline -f execute
 end
 bind --user \cc __transient_cancel
