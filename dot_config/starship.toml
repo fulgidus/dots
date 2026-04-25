@@ -1,13 +1,13 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-# ╭─ [ os ][ 󰉖 dir ][ branch  status ] ──────── [ node ][ ⏱ 3s ][ 12:34 ]
+# ╭─ [ os ][ 󰉖 dir ][ branch  status ] ────── [  node ][ ⏱ 3s ][ 12:34 ]
 # ╰─ ❯
 #
-# Palette: Tokyo Night (#7aa2f7 blue · #9ece6a green · #bb9af7 purple · #e0af68 yellow)
-# Font:    FiraCode Nerd Font Mono
+# $fill separa sinistra e destra sulla riga 1 (come p10k)
+# right_format rimosso: in fish funziona solo sulla riga di input (╰─),
+# non sulla riga info (╭─) — $fill è la soluzione corretta per 2 righe
 
-format = """
-[╭─](fg:#565f89)\
+format = """[╭─](fg:#565f89)\
 [](fg:#bb9af7)\
 $os\
 [](fg:#bb9af7 bg:#7aa2f7)\
@@ -16,18 +16,26 @@ $directory\
 $git_branch\
 $git_status\
 [](fg:#394260)\
+$fill\
+$nodejs\
+$python\
+$rust\
+$golang\
+$kubernetes\
+$cmd_duration\
+$time\
 \n[╰─](fg:#565f89)$character"""
 
-right_format = """$nodejs$python$rust$golang$kubernetes$cmd_duration$time"""
-
-add_newline = false
+# add_newline = true → una riga bianca prima di ogni prompt (leggibilità)
+# il formato NON inizia con \n (altrimenti con add_newline=true sarebbero due righe bianche)
+add_newline = true
 
 # ── Left segments ────────────────────────────────────────────────────────────
 
 [os]
 disabled = false
-style = "bg:#bb9af7 fg:#1a1b2e bold"
-format = "[ $symbol ]($style)"
+style    = "bg:#bb9af7 fg:#1a1b2e bold"
+format   = "[ $symbol ]($style)"
 
 [os.symbols]
 Ubuntu  = "󰕈"
@@ -38,12 +46,12 @@ Linux   = "󰌽"
 Windows = "󰍲"
 
 [directory]
-style              = "bg:#7aa2f7 fg:#1a1b2e bold"
-format             = "[ 󰉖 $path ]($style)"
-truncation_length  = 3
-truncate_to_repo   = true
-read_only          = " 󰌾"
-read_only_style    = "bg:#7aa2f7 fg:#f7768e"
+style             = "bg:#7aa2f7 fg:#1a1b2e bold"
+format            = "[ 󰉖 $path ]($style)"
+truncation_length = 3
+truncate_to_repo  = true
+read_only         = " 󰌾"
+read_only_style   = "bg:#7aa2f7 fg:#f7768e"
 
 [git_branch]
 style  = "bg:#394260 fg:#9ece6a"
@@ -65,33 +73,41 @@ staged     = " +"
 renamed    = " »"
 deleted    = " ✘"
 
-# ── Right segments ───────────────────────────────────────────────────────────
+# ── Right segments (via $fill — appaiono sulla riga ╭─, non sulla riga ❯) ───
 
 [nodejs]
-format       = "[ $symbol$version]($style) "
-style        = "fg:#41c7c1"
-symbol       = " "
-detect_files = ["package.json", ".nvmrc", ".node-version"]
+format            = "[ $symbol$version]($style) "
+style             = "fg:#41c7c1"
+symbol            = " "
+detect_files      = ["package.json", ".nvmrc", ".node-version"]
+detect_folders    = ["node_modules"]
+detect_extensions = []   # disabilita trigger su *.js *.ts *.mjs ecc.
 
 [python]
-format       = "[ $symbol$version( \\($virtualenv\\))]($style) "
-style        = "fg:#f7c948"
-symbol       = " "
+format            = "[ $symbol$version]($style) "
+style             = "fg:#f7c948"
+symbol            = " "
+detect_extensions = []
+detect_files      = ["requirements.txt", "pyproject.toml", "setup.py", ".python-version", "Pipfile"]
+detect_folders    = [".venv", "venv"]
 
 [rust]
-format = "[ $symbol$version]($style) "
-style  = "fg:#f7768e"
-symbol = " "
+format            = "[ $symbol$version]($style) "
+style             = "fg:#f7768e"
+symbol            = " "
+detect_extensions = []
+detect_files      = ["Cargo.toml"]
 
 [golang]
-format = "[ $symbol$version]($style) "
-style  = "fg:#7dcfff"
-symbol = " "
+format            = "[ $symbol$version]($style) "
+style             = "fg:#7dcfff"
+symbol            = " "
+detect_extensions = []
+detect_files      = ["go.mod", "go.sum"]
 
 [kubernetes]
 disabled = false
 format   = "[ 󱃾 $context](fg:#bb9af7)[:$namespace](fg:#7dcfff) "
-# Visibile solo quando kubectl è configurato (KUBECONFIG / ~/.kube/config)
 
 [cmd_duration]
 format            = "[  $duration]($style) "
