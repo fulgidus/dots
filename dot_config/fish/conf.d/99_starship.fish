@@ -9,15 +9,13 @@ starship init fish | source
 # NON aggiungere binding manuali per \cc: corrompono il display
 enable_transience
 
-# Ctrl+C — transient manuale via ANSI (fish_transient_prompt non copre Ctrl+C)
-# Al momento del binding, il cursore è sulla riga ╰─❯ (NON su riga nuova sotto).
-# \r      → col 0 della riga corrente (╰─❯)
-# \e[1A   → su di 1 riga (╭─)
-# \e[J    → cancella da qui a fine schermo (╭─ + ╰─❯)
-# poi cancel-commandline senza repaint (repaint corrompe il cursore)
+# Ctrl+C — simula un Enter su riga vuota (che fish_transient_prompt gestisce già)
+# commandline --replace '' svuota il buffer senza toccare il terminale
+# commandline -f execute triggera il meccanismo transient nativo di fish 4.1+
+# (niente ANSI, niente repaint — fish gestisce tutto internamente)
 function __transient_cancel
-    printf '\r\e[1A\e[J\e[1;32m❯\e[0m'
-    commandline -f cancel-commandline
+    commandline --replace ''
+    commandline -f execute
 end
 bind --user \cc __transient_cancel
 bind --user -M insert \cc __transient_cancel
