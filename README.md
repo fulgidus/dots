@@ -8,7 +8,7 @@ Funzionano su **Linux** (Linuxbrew) e **macOS** (Homebrew) senza modifiche.
 | Categoria | Tool |
 |---|---|
 | Shell | [Fish](https://fishshell.com/) 4+ |
-| Prompt | [Starship](https://starship.rs/) — tema Tokyo Night |
+| Prompt | [Starship](https://starship.rs/) — tema Tokyo Night custom |
 | Terminale | [WezTerm](https://wezfurlong.org/wezterm/) |
 | Version manager | [mise](https://mise.jdx.dev/) |
 | History sync | [atuin](https://atuin.sh/) |
@@ -17,44 +17,69 @@ Funzionano su **Linux** (Linuxbrew) e **macOS** (Homebrew) senza modifiche.
 
 ### CLI moderni
 
-| Comando | Rimpiazza | Tool |
+| Alias/comando | Rimpiazza | Tool |
 |---|---|---|
-| `ls` / `ll` / `lt` | `ls` | [eza](https://eza.rocks/) |
-| `cat` | `cat` | [bat](https://github.com/sharkdp/bat) |
-| `z <path>` | `cd` | [zoxide](https://github.com/ajeetdsouza/zoxide) |
+| `ls` / `ll` / `lt` | `ls` | [eza](https://eza.rocks/) — icone, git status, tree |
+| `cat` | `cat` | [bat](https://github.com/sharkdp/bat) — syntax highlight, man pager |
+| `z <path>` | `cd` | [zoxide](https://github.com/ajeetdsouza/zoxide) — frecency |
 | `rg` | `grep` | [ripgrep](https://github.com/BurntSushi/ripgrep) |
 | `fd` | `find` | [fd](https://github.com/sharkdp/fd) |
-| Ctrl+R / Ctrl+T | — | [fzf](https://github.com/junegunn/fzf) |
+| `lg` | — | [lazygit](https://github.com/jesseduffield/lazygit) — TUI git |
+| Ctrl+R / Ctrl+T / Alt+C | — | [fzf](https://github.com/junegunn/fzf) — fuzzy finder |
+
+---
+
+## Prompt
+
+Layout a due righe con transient prompt (le righe precedenti collassano a `❯`):
+
+```
+╭─ [ os ][ 󰉖 dir ][ branch  status ] ········ [  node ][ ⏱ 3s ][ 12:34 ]
+╰─❯ _
+```
+
+| Caso | Comportamento |
+|---|---|
+| Comando + Enter | `❯ comando` (verde/rosso per exit code) poi output |
+| Enter vuoto | `❯` |
+| Ctrl+C | `❯` — input corrente cancellato (comportamento standard Unix) |
+
+Segmenti destra visibili **solo nella directory del progetto**:
+`node`, `python`, `rust`, `go`, `kubernetes` (solo se kubectl configurato)
 
 ---
 
 ## File tracciati
 
 ```
-~/.local/share/chezmoi/              ← source dir (questo repo)
-├── .chezmoi.toml.tmpl               ← dati machine-specific (nome, email)
-├── dot_gitconfig                    ← ~/.gitconfig  (con delta)
-├── dot_wezterm.lua                  ← ~/.wezterm.lua
+~/.local/share/chezmoi/
+├── .chezmoi.toml.tmpl                    ← dati machine-specific (nome, email)
+├── dot_gitconfig                         ← ~/.gitconfig (con delta)
+├── dot_wezterm.lua                       ← ~/.wezterm.lua
 ├── README.md
 └── dot_config/
-    ├── starship.toml                ← ~/.config/starship.toml
+    ├── starship.toml                     ← ~/.config/starship.toml
     ├── fish/
-    │   ├── config.fish              ← ~/.config/fish/config.fish
-    │   └── conf.d/
-    │       ├── 00_paths.fish        ← PATH: bun, pnpm, opencode, zvm
-    │       ├── 01_env.fish          ← EDITOR, BAT_THEME, fzf backend
-    │       ├── 02_aliases.fish      ← ls/cat/lg/cz e altri alias
-    │       ├── 10_mise.fish         ← attiva mise (Node, Python, Go…)
-    │       ├── 11_zoxide.fish       ← attiva zoxide (`z`, `zi`)
-    │       ├── 12_fzf.fish          ← key bindings fzf (Ctrl+R, Ctrl+T, Alt+C)
-    │       ├── 13_atuin.fish        ← history sync cross-machine
-    │       ├── 14_viteplus.fish     ← Vite+ runtime
-    │       └── 99_starship.fish     ← init prompt (deve stare ultimo)
-    └── Code/User/
-        └── settings.json           ← ~/.config/Code/User/settings.json
+    │   ├── config.fish                   ← bootstrap minimale (greeting off)
+    │   └── conf.d/                       ← caricati in ordine alfabetico
+    │       ├── 00_paths.fish             ← Homebrew + PATH (deve stare primo)
+    │       ├── 01_env.fish               ← EDITOR, BAT_THEME, fzf backend
+    │       ├── 02_aliases.fish           ← ls/cat/lg/cz e altri alias
+    │       ├── 10_mise.fish              ← attiva mise (Node, Python, Go…)
+    │       ├── 11_zoxide.fish            ← z / zi
+    │       ├── 12_fzf.fish               ← Ctrl+R, Ctrl+T, Alt+C
+    │       ├── 13_atuin.fish             ← history sync cross-machine
+    │       ├── 14_viteplus.fish          ← Vite+ runtime
+    │       └── 99_starship.fish          ← prompt + transient (deve stare ultimo)
+    ├── Code/User/
+    │   └── settings.json                 ← ~/.config/Code/User/settings.json
+    └── starship.toml
+└── dot_local/share/fonts/
+    ├── FiraCode/                         ← FiraCode Nerd Font
+    └── Meslo/                            ← Meslo Nerd Font
 ```
 
-> **Convenzione chezmoi:** `dot_` → `.`, `private_` → permessi 600, `.tmpl` → template Go.
+> **Convenzione chezmoi:** `dot_` → `.` · `private_` → permessi 600 · `.tmpl` → template Go
 
 ---
 
@@ -75,15 +100,11 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 <summary>Fish come shell di default</summary>
 
 ```bash
-# Aggiungi fish a /etc/shells
+# Linux (Linuxbrew)
 echo /home/linuxbrew/.linuxbrew/bin/fish | sudo tee -a /etc/shells
-
-# Imposta come default
 chsh -s /home/linuxbrew/.linuxbrew/bin/fish
-```
 
-Su macOS con Homebrew:
-```bash
+# macOS (Homebrew)
 echo /opt/homebrew/bin/fish | sudo tee -a /etc/shells
 chsh -s /opt/homebrew/bin/fish
 ```
@@ -95,7 +116,8 @@ chsh -s /opt/homebrew/bin/fish
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply git@github.com:fulgidus/dots.git
 ```
 
-Clona il repo, genera il config da `.chezmoi.toml.tmpl` e copia tutti i file nelle posizioni corrette.
+Clona il repo, genera il config e copia tutti i file nelle posizioni corrette.  
+Aggiorna anche i font (`~/.local/share/fonts/`) e lancia `fc-cache -f`.
 
 ### 3. Installa i tool via brew
 
@@ -103,14 +125,12 @@ Clona il repo, genera il config da `.chezmoi.toml.tmpl` e copia tutti i file nel
 brew install fish starship eza bat zoxide fzf ripgrep fd git-delta mise atuin lazygit gh
 ```
 
-### 4. Configura atuin (history sync)
+### 4. Configura atuin (history sync tra macchine)
 
 ```bash
-# Nuovo account
-atuin register -u <username> -e <email> -p <password>
-
-# Oppure login su account esistente
-atuin login -u <username> -p <password>
+atuin register -u <username> -e <email> -p <password>   # nuovo account
+# oppure
+atuin login -u <username> -p <password>                  # account esistente
 
 atuin sync
 ```
@@ -118,11 +138,14 @@ atuin sync
 ### 5. Installa i runtime con mise
 
 ```bash
-# Esempio: installa Node LTS e Python
-mise use --global node@lts python@latest
+mise use --global node@lts python@latest   # esempio
+mise list                                   # verifica
+```
 
-# Verifica
-mise list
+### 6. Aggiorna font cache
+
+```bash
+fc-cache -f ~/.local/share/fonts
 ```
 
 ---
@@ -131,47 +154,38 @@ mise list
 
 ### Modificare un file
 
-Modifica il file direttamente nella sua posizione (es. `~/.config/fish/conf.d/02_aliases.fish`), poi:
+Modifica direttamente nella posizione normale, poi sincronizza:
 
 ```bash
 chezmoi re-add ~/.config/fish/conf.d/02_aliases.fish
 ```
 
-### Scorciatoie alias
+### Alias chezmoi
 
 ```bash
-czd   # chezmoi diff   — vedi cosa è cambiato
-cza   # chezmoi apply  — applica le modifiche dal repo
-czcd  # chezmoi cd     — entra nella source dir
+czd    # chezmoi diff   — mostra differenze tra source e filesystem
+cza    # chezmoi apply  — applica source → filesystem
+czcd   # chezmoi cd     — entra nella source dir (~/.local/share/chezmoi)
 ```
 
-### Vedere le differenze pendenti
+### Pull aggiornamenti dal repo
 
 ```bash
-chezmoi diff    # diff completo tra source dir e filesystem
-chezmoi status  # lista file modificati (stile git status)
+chezmoi update   # git pull + chezmoi apply in un colpo
 ```
 
-### Aggiornare dal repo (pull)
+### Editare nella source dir
 
 ```bash
-chezmoi update  # git pull + chezmoi apply in un colpo
-```
-
-### Modificare nella source dir ed editare direttamente
-
-```bash
-chezmoi edit ~/.config/fish/conf.d/02_aliases.fish  # apre nell'editor
-chezmoi apply                                         # applica
+chezmoi edit ~/.config/fish/conf.d/02_aliases.fish
+chezmoi apply
 ```
 
 ### Commit e push
 
 ```bash
-czcd  # entra in ~/.local/share/chezmoi
-git add -A
-git commit -m "feat: descrizione"
-git push
+czcd
+git add -A && git commit -m "feat: ..." && git push
 ```
 
 ---
@@ -188,19 +202,17 @@ git add -A && git commit -m "feat: add ghostty config" && git push
 
 ## Configurazioni machine-specific (template)
 
-Per valori diversi tra macchine — proxy aziendale, email lavoro/personale, path diversi.
+Per email lavoro/personale, proxy aziendale, path diversi tra macchine.
 
-### 1. Converti un file in template
+### Converti un file in template
 
 ```bash
-chezmoi chattr +template ~/.gitconfig
-# diventa dot_gitconfig.tmpl nella source dir
+chezmoi chattr +template ~/.gitconfig   # → dot_gitconfig.tmpl nella source dir
 ```
 
-### 2. Dati locali
+### Dati locali (`~/.config/chezmoi/chezmoi.toml`)
 
-Il file `.chezmoi.toml.tmpl` genera `~/.config/chezmoi/chezmoi.toml` al primo `init`.  
-Per editarlo su una macchina esistente:
+Generato da `.chezmoi.toml.tmpl` al primo `init`. Per modificarlo:
 
 ```bash
 chezmoi edit-config
@@ -212,21 +224,20 @@ chezmoi edit-config
     email = "alessio.corsi@gmail.com"
 ```
 
-### 3. Sintassi template
+### Sintassi template
 
 ```
-# dot_gitconfig.tmpl
 [user]
     name  = {{ .name }}
     email = {{ .email }}
 ```
 
 ```
-# Condizionale OS
+# Condizionale OS (fish syntax nel template)
 {{- if eq .chezmoi.os "darwin" }}
-export BROWSER=Safari
+set -gx BROWSER Safari
 {{- else }}
-export BROWSER=google-chrome
+set -gx BROWSER google-chrome
 {{- end }}
 
 # Condizionale hostname
@@ -235,7 +246,7 @@ set -gx HTTP_PROXY "http://proxy.azienda.it:8080"
 {{- end }}
 ```
 
-### Variabili sempre disponibili
+### Variabili disponibili nei template
 
 | Variabile | Esempio |
 |---|---|
@@ -250,7 +261,7 @@ set -gx HTTP_PROXY "http://proxy.azienda.it:8080"
 ## Riferimenti
 
 - [chezmoi.io](https://chezmoi.io) — documentazione ufficiale
-- [fishshell.com](https://fishshell.com/docs/current/) — documentazione fish
-- [starship.rs](https://starship.rs/config/) — configurazione starship
+- [fishshell.com/docs](https://fishshell.com/docs/current/) — documentazione fish
+- [starship.rs/config](https://starship.rs/config/) — configurazione starship
 - [mise.jdx.dev](https://mise.jdx.dev/) — version manager
-- [atuin.sh](https://atuin.sh/docs/) — history sync
+- [atuin.sh/docs](https://atuin.sh/docs/) — history sync
