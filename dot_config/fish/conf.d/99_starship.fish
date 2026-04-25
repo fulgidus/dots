@@ -14,9 +14,9 @@ enable_transience
 # commandline -f execute triggera il meccanismo transient nativo di fish 4.1+
 # (niente ANSI, niente repaint — fish gestisce tutto internamente)
 function __transient_cancel
-    commandline --replace ''
-    commandline -f repaint   # ridisegna la riga vuota (rimuove il testo parziale)
-    commandline -f execute
+    commandline -f beginning-of-line  # vai all'inizio (fish aggiorna il cursore internamente)
+    commandline -f kill-line           # cancella fino a fine riga (fish aggiorna display + buffer)
+    commandline -f execute             # esegui riga vuota → transient nativo
 end
 bind --user \cc __transient_cancel
 bind --user -M insert \cc __transient_cancel
