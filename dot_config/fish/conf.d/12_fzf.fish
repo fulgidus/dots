@@ -2,4 +2,4 @@
 # Ctrl+R  → history fuzzy search
 # Ctrl+T  → file picker
 # Alt+C   → directory jump
-fzf --fish | source
+command -q fzf && fzf --fish | source
