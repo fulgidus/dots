@@ -20,8 +20,10 @@ bind --user \cc __transient_cancel
 bind --user -M insert \cc __transient_cancel
 
 # Transient prompt: ❯ verde su successo, ❯ rosso su errore
+# Il valore di exit code arriva come --status=N negli $argv, non in $STARSHIP_CMD_STATUS
 function starship_transient_prompt_func
-    if test $STARSHIP_CMD_STATUS -eq 0
+    argparse --ignore-unknown 'status=' -- $argv 2>/dev/null
+    if test "$_flag_status" = "0" -o -z "$_flag_status"
         printf "\e[1;32m❯\e[0m "
     else
         printf "\e[1;31m❯\e[0m "
