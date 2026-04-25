@@ -4,19 +4,26 @@ command -q starship || return
 
 starship init fish | source
 
-# Abilita il transient prompt nativo di starship.
-# Fish >= 4.1: usa fish_transient_prompt built-in (set -g fish_transient_prompt 1).
-# Il prompt ╭─/╰─ precedente collassa a  ❯ <comando> su:
-#   • Enter con comando
-#   • Enter vuoto
-#   • Ctrl+C
+# enable_transience su fish >= 4.1 fa solo: set -g fish_transient_prompt 1
+# → gestisce Enter (con e senza comando)
+# → NON gestisce Ctrl+C (non bindato)
 enable_transience
+
+# Ctrl+C: setta TRANSIENT=1, fa repaint (mostra ❯), poi cancella la riga
+function __transient_cancel
+    set -g TRANSIENT 1
+    set -g RIGHT_TRANSIENT 1
+    commandline -f repaint
+    commandline -f cancel-commandline
+end
+bind --user \cc __transient_cancel
+bind --user -M insert \cc __transient_cancel
 
 # Transient prompt: ❯ verde su successo, ❯ rosso su errore
 function starship_transient_prompt_func
     if test $STARSHIP_CMD_STATUS -eq 0
-        printf "\e[1;32m❯\e[0m "   # verde
+        printf "\e[1;32m❯\e[0m "
     else
-        printf "\e[1;31m❯\e[0m "   # rosso
+        printf "\e[1;31m❯\e[0m "
     end
 end
