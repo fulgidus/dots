@@ -4,6 +4,7 @@ local conf = wez.config_builder()
 -- General
 conf.line_height = 1.0
 conf.font = wez.font("FiraCode Nerd Font Mono")
+conf.font_size = 11.0
 conf.window_background_opacity = 0.8
 conf.color_scheme = "Tokyo Night"
 conf.default_cursor_style = "SteadyUnderline"

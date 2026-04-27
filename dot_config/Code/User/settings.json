@@ -1,6 +1,6 @@
 // Inserire le impostazioni in questo file per sovrascrivere quelle predefinite
 {
-    "editor.fontFamily": "Fira Code",
+    "editor.fontFamily": "'FiraCode Nerd Font Mono', 'FiraCode Nerd Font', 'Fira Code'",
     "editor.fontSize": 12,
     "editor.fontLigatures": true,
     "git.confirmSync": false,
@@ -183,7 +183,7 @@
     "zig.zls.enabled": "on",
     "chat.tools.autoApprove": true,
     "workbench.activityBar.location": "top",
-    "terminal.integrated.fontFamily": "monospace",
+    "terminal.integrated.fontFamily": "'FiraCode Nerd Font Mono', 'FiraCode Nerd Font', monospace",
     "yaml.schemas": {
         "file:///home/fulgidus/.vscode/extensions/continue.continue-1.2.10-linux-x64/config-yaml-schema.json": [
             ".continue/**/*.yaml"
