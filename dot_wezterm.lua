@@ -9,6 +9,8 @@ conf.window_background_opacity = 0.8
 conf.color_scheme = "Tokyo Night"
 conf.default_cursor_style = "SteadyUnderline"
 conf.scrollback_lines = 10000
+conf.prefer_egl = true
+conf.max_fps = 60
 
 
 -- Copy to clipboard on mouse select
