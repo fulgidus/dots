@@ -1,0 +1,8 @@
+[Unit]
+Description=NASA APOD image fetcher
+Documentation=https://github.com/nasa/apod-api
+
+[Service]
+Type=oneshot
+Environment=NASA_API_KEY={{ .nasa_api_key }}
+ExecStart=%h/.local/bin/apod-wallpaper.sh fetch

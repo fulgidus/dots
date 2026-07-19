@@ -1,0 +1,9 @@
+[Unit]
+Description=NASA APOD image fetch timer (hourly)
+
+[Timer]
+OnCalendar=hourly
+RandomizedDelaySec=10s
+
+[Install]
+WantedBy=timers.target

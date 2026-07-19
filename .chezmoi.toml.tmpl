@@ -1,6 +1,8 @@
 {{- $name := "Alessio Corsi" -}}
 {{- $email := "alessio.corsi@gmail.com" -}}
+{{- $nasaApiKey := promptStringOnce . "nasa_api_key" "NASA API key ( get at https://api.nasa.gov/ )" -}}
 
 [data]
     name  = {{ $name | quote }}
     email = {{ $email | quote }}
+    nasa_api_key = {{ $nasaApiKey | quote }}
