@@ -1,0 +1,31 @@
+{
+    "dashboard": {
+        "resourceUpdateInterval": 500
+    },
+    "general": {
+        "apps": {
+            "terminal": [
+                "/usr/bin/flatpak",
+                "run",
+                "--branch=stable",
+                "--arch=x86_64",
+                "--command=wezterm",
+                "org.wezfurlong.wezterm",
+                "start",
+                "--cwd",
+                "."
+            ]
+        }
+    },
+    "lock": {
+        "enableFprint": false,
+        "enableHowdy": false
+    },
+    "nexus": {
+        "networkRescanInterval": 5000
+    },
+    "services": {
+        "lyricsBackend": "Local",
+        "smartScheme": false
+    }
+}
