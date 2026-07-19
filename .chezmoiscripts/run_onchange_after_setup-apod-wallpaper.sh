@@ -9,10 +9,6 @@ fi
 # Caelestia: fixed tokyo-night scheme
 if command -v caelestia &>/dev/null; then
     caelestia scheme set -n tokyonight -f medium -m dark
-    SHELL_JSON="$HOME/.config/caelestia/shell.json"
-    if [ -f "$SHELL_JSON" ]; then
-        jq '.services.smartScheme = false' "$SHELL_JSON" > "${SHELL_JSON}.tmp" && mv "${SHELL_JSON}.tmp" "$SHELL_JSON"
-    fi
 fi
 
 # Enable timers
