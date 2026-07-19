@@ -6,7 +6,7 @@ INDEX="$CACHE/index.json"
 CURRENT="$CACHE/current.jpg"
 SDDM_SYMLINK="/usr/share/sddm/themes/caelestia/assets/background"
 RETENTION_AGE=$((7 * 86400))
-NASA_API_KEY="${NASA_API_KEY:-}"
+NASA_API_KEY="${NASA_API_KEY:-"$(grep 'nasa_api_key' ~/.config/chezmoi/chezmoi.toml 2>/dev/null | head -1 | sed 's/.*= *"\(.*\)"/\1/')"}"
 FETCH_COUNT=5
 
 mkdir -p "$CACHE"
@@ -111,7 +111,7 @@ cmd_rotate() {
 
     if [ -n "$chosen" ] && [ -f "$CACHE/$chosen" ] && is_valid_image "$CACHE/$chosen"; then
         cp "$CACHE/$chosen" "$CURRENT"
-        command -v caelestia &>/dev/null && caelestia wallpaper -f "$CURRENT"
+        command -v caelestia &>/dev/null && caelestia wallpaper -f "$CACHE/$chosen"
     fi
 
     # cleanup expired index entries
