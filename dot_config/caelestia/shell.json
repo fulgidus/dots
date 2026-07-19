@@ -17,10 +17,9 @@
             ]
         }
     },
-    "lock": {
-        "enableFprint": false,
-        "enableHowdy": false
-    },
+"lock": {
+    "enableFprint": false
+  },
     "nexus": {
         "networkRescanInterval": 5000
     },
